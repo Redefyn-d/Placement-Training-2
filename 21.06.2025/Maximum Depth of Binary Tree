@@ -1,0 +1,36 @@
+import java.util.Scanner;
+class TreeNode {
+    int val;
+    TreeNode left, right;
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+public class MaxDepth {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int size = input.nextInt();
+        ArrayList<TreeNode> nodes = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            nodes.add(new TreeNode(input.nextInt()));
+        }
+        for (int i = 0; i < size; i++) {
+            int leftIndex = input.nextInt();
+            int rightIndex = input.nextInt();
+            if (leftIndex != -1) {
+                nodes.get(i).left = nodes.get(leftIndex);
+            }
+            if (rightIndex != -1) {
+                nodes.get(i).right = nodes.get(rightIndex);
+            }
+        }
+        System.out.println(maxDepth(nodes.get(0)));
+        input.close();
+    }
+    static int maxDepth(TreeNode node) {
+        if (node == null) return 0;
+        int leftDepth = maxDepth(node.left);
+        int rightDepth = maxDepth(node.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+}
