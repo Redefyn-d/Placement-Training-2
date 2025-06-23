@@ -1,0 +1,29 @@
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+public class GroupAnagrams {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int count = input.nextInt();
+        input.nextLine();
+        String[] words = new String[count];
+        for (int i = 0; i < count; i++) {
+            words[i] = input.nextLine();
+        }
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
+        for (String word : words) {
+            char[] chars = word.toCharArray();
+            Arrays.sort(chars);
+            String sorted = new String(chars);
+            map.computeIfAbsent(sorted, k -> new ArrayList<>()).add(word);
+        }
+        for (ArrayList<String> group : map.values()) {
+            for (String word : group) {
+                System.out.print(word + " ");
+            }
+            System.out.println();
+        }
+        input.close();
+    }
+}
