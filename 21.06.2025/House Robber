@@ -1,0 +1,27 @@
+import java.util.Scanner;
+public class HouseRobber {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int size = input.nextInt();
+        int[] money = new int[size];
+        for (int i = 0; i < size; i++) {
+            money[i] = input.nextInt();
+        }
+        if (size == 0) {
+            System.out.println(0);
+            return;
+        }
+        if (size == 1) {
+            System.out.println(money[0]);
+            return;
+        }
+        int[] maxMoney = new int[size];
+        maxMoney[0] = money[0];
+        maxMoney[1] = Math.max(money[0], money[1]);
+        for (int i = 2; i < size; i++) {
+            maxMoney[i] = Math.max(maxMoney[i - 1], maxMoney[i - 2] + money[i]);
+        }
+        System.out.println(maxMoney[size - 1]);
+        input.close();
+    }
+}
